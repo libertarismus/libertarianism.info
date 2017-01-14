@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+	<channel>
+		<title>Libertarianism</title>
+		<description>Philosopy of Freedom</description>
+		<link>https://www.libertarianism.info</link>
+		<atom:link href="https://www.libertarianism.info/feed.xml" rel="self" type="application/rss+xml" />
+		
+			<item>
+				<title>Learn Liberty-Behavioral Economics, Ep. 1-How and Why the Economy Works</title>
+				
+				
+					<description>
+</description>
+				
+				<pubDate>Fri, 06 Jan 2017 00:00:00 +0100</pubDate>
+				<link>https://www.libertarianism.info/Learn-Liberty-Behavioral-Economics,-Ep.-1-How-and-Why-the-Economy-Works/</link>
+				<guid isPermaLink="true">https://www.libertarianism.info/Learn-Liberty-Behavioral-Economics,-Ep.-1-How-and-Why-the-Economy-Works/</guid>
+			</item>
+		
+			<item>
+				<title>Voluntarism - How could a voluntary society function?</title>
+				
+				
+					<description>
+</description>
+				
+				<pubDate>Sun, 01 Jan 2017 00:00:00 +0100</pubDate>
+				<link>https://www.libertarianism.info/Voluntarism-How-could-a-voluntary-society-function/</link>
+				<guid isPermaLink="true">https://www.libertarianism.info/Voluntarism-How-could-a-voluntary-society-function/</guid>
+			</item>
+		
+	</channel>
+</rss>
