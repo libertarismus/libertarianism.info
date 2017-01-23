@@ -60,7 +60,7 @@ module.exports = function(grunt) {
             },
             pages: {
                 options: {
-                    remote: 'https://github.com/libertarismus/libertarianism.info', // change that
+                    remote: 'https://github.com/libertarismus/libertarismus.org', // change that
                     branch: 'gh-pages' // adjust here
                 }
             }
@@ -87,6 +87,6 @@ module.exports = function(grunt) {
     // Default task(s).
 
     grunt.registerTask("serve", ["shell:jekyllServe"]);
-    grunt.registerTask("default", ["sass", "autoprefixer", "shell:jekyllBuild", "watch"]);
+    grunt.registerTask("default", ["sass", "autoprefixer", "uglify", "shell:jekyllBuild"]);
     grunt.registerTask("deploy", ["buildcontrol:pages"]);
 };
