@@ -1,6 +1,6 @@
 ---
 author: Carsten 
-title: Taxes are Bad that is a Science Fact
+title: Taxes are Bad for Growth that is a Science Fact 
 description: Taxes are bad for economic growth. This site provides linkes to scientific papers that prove this.
 featimg: money.jpg
 featimgdesc: Image provided by http://401kcalculator.org under CC-by-sa-2.0
