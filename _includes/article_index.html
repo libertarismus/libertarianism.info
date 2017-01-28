@@ -40,7 +40,7 @@
     {% endif %}
     {% if post.category %}
         <span class="category">
-            {{ post.category }}
+            {{ post.category |  join: ', ' }}
         </span>
     {% endif %}
     <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/'}}">
