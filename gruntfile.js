@@ -128,7 +128,7 @@ require('load-grunt-tasks')(grunt);
             },
             dist: {
                 files: {
-                    '.tmp/<%= app.baseurl %>/js/scripts.js': ['<%= app.app %>/_assets/js/**/*.js']
+                    '.tmp/<%= app.baseurl %>/js/build/global.min.js': ['<%= app.app %>/_assets/js/**/*.js']
                 }
             }
         },
@@ -308,6 +308,7 @@ require('load-grunt-tasks')(grunt);
     ]);
  
     grunt.registerTask('default', [
-        'serve'
+        'build',
+	'copy'
     ]);
 };
