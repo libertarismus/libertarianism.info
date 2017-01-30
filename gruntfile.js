@@ -1,92 +1,313 @@
+'use strict';
+ 
 module.exports = function(grunt) {
-
-    // Project configuration.
-    grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-
-        uglify: {
-            build: {
-                src: 'js/*.js',
-                dest: 'js/build/global.min.js'
+    // Show elapsed time after tasks run
+    // Load all Grunt tasks
+ require('time-grunt')(grunt);
+require('load-grunt-tasks')(grunt); 
+   grunt.initConfig({
+        app: {
+            app: 'app',
+            dist: 'dist',
+            baseurl: ''
+        },
+        watch: {
+            sass: {
+                files: ['<%= app.app %>/_assets/scss/**/*.{scss,sass}'],
+                tasks: ['sass:server', 'autoprefixer']
+            },
+            scripts: {
+                files: ['<%= app.app %>/_assets/js/**/*.{js}'],
+                tasks: ['uglify']
+            },
+            jekyll: {
+                files: [
+                    '<%= app.app %>/**/*.{html,yml,md,mkd,markdown}'
+                ],
+                tasks: ['jekyll:server']
+            },
+            livereload: {
+                options: {
+                    livereload: '<%= connect.options.livereload %>'
+                },
+                files: [
+                    '.jekyll/**/*.{html,yml,md,mkd,markdown}',
+                    '.tmp/<%= app.baseurl %>/css/*.css',
+                    '.tmp/<%= app.baseurl %>/js/*.js',
+                    '<%= app.app %>/img/**/*.{gif,jpg,jpeg,png,svg,webp}'
+                ]
             }
         },
-
-        sass: {
+        connect: {
             options: {
-                outputStyle: 'compressed',
+                port: 9000,
+                livereload: 35729,
+                // change this to '0.0.0.0' to access the server from outside
+                hostname: 'localhost'
+            },
+            livereload: {
+                options: {
+                    open: {
+                        target: 'http://localhost:9000/<%= app.baseurl %>'
+                    },
+                    base: [
+                        '.jekyll',
+                        '.tmp',
+                        '<%= app.app %>'
+                    ]
+                }
+            },
+            dist: {
+                options: {
+                    open: {
+                        target: 'http://localhost:9000/<%= app.baseurl %>'
+                    },
+                    base: [
+                        '<%= app.dist %>',
+                        '.tmp'
+                    ]
+                }
+            }
+        },
+        clean: {
+            server: [
+                '.jekyll',
+                '.tmp'
+            ],
+            dist: {
+                files: [{
+                    dot: true,
+                    src: [
+                        '.tmp',
+                        '<%= app.dist %>/*',
+                        '!<%= app.dist %>/.git*'
+                    ]
+                }]
+            }
+        },
+        jekyll: {
+            options: {
+                config: '_config.yml,_config.build.yml',
+                src: '<%= app.app %>'
+            },
+            dist: {
+                options: {
+                    dest: '<%= app.dist %>/<%= app.baseurl %>',
+                }
+            },
+            server: {
+                options: {
+                    config: '_config.yml',
+                    dest: '.jekyll/<%= app.baseurl %>'
+                }
+            }
+        },
+        htmlmin: {
+            dist: {
+                options: {
+                    removeComments: true,
+                    collapseWhitespace: true,
+                    collapseBooleanAttributes: true,
+                    removeAttributeQuotes: true,
+                    removeRedundantAttributes: true,
+                    removeEmptyAttributes: true,
+                    minifyJS: true,
+                    minifyCSS: true
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= app.dist %>/<%= app.baseurl %>',
+                    src: '**/*.html',
+                    dest: '<%= app.dist %>/<%= app.baseurl %>'
+                }]
+            }
+        },
+        uglify: {
+            options: {
+                preserveComments: false
             },
             dist: {
                 files: {
-                    'css/main.css': 'sass/main.scss',
-                    'css/grid.css': 'sass/grid.scss',
-                    'css/classic.css': 'sass/classic.scss'
+                    '.tmp/<%= app.baseurl %>/js/scripts.js': ['<%= app.app %>/_assets/js/**/*.js']
                 }
             }
         },
-
+        sass: {
+            server: {
+                options: {
+                    sourceMap: true
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= app.app %>/_assets/scss',
+                    src: '**/*.{scss,sass}',
+                    dest: '.tmp/<%= app.baseurl %>/css',
+                    ext: '.css'
+                }]
+            },
+            dist: {
+                options: {
+                    outputStyle: 'compressed'
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= app.app %>/_assets/scss',
+                    src: '**/*.{scss,sass}',
+                    dest: '<%= app.dist %>/<%= app.baseurl %>/css',
+                    ext: '.css'
+                }]
+            }
+        },
+        uncss: {
+            options: {
+                htmlroot: '<%= app.dist %>/<%= app.baseurl %>',
+                report: 'gzip'
+            },
+            dist: {
+                src: '<%= app.dist %>/<%= app.baseurl %>/**/*.html',
+                dest: '.tmp/<%= app.baseurl %>/css/main.css'
+            }
+        },
         autoprefixer: {
             options: {
-                browsers: ['> 1%']
+                browsers: ['last 3 versions']
             },
-            no_dest: {
-                src: 'css/*.css' // globbing is also possible here
-            },
-        },
-
-        watch: {
-            options: {
-                livereload: true
-            },
-            site: {
-                files: ["*.html", "**/*.html", "*.md", "**/*.md", "**/*.yml", "*.yml", "!_site/*.*", "!_site/**/*.*"],
-                tasks: ["shell:jekyllBuild"]
-            },
-            js: {
-                files: ["js/*.js"],
-                tasks: ["uglify", "shell:jekyllBuild"]
-            },
-            css: {
-                files: ["sass/*.scss", "sass/partials/*.scss", "sass/partials/components/*.scss", "sass/partials/layout/*.scss", "sass/modules/*.scss"],
-                tasks: ["sass", "autoprefixer", "shell:jekyllBuild"]
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '.tmp/<%= app.baseurl %>/css',
+                    src: '**/*.css',
+                    dest: '.tmp/<%= app.baseurl %>/css'
+                }]
             }
         },
 
-        buildcontrol: {
-            options: {
-                dir: '_site',
-                commit: true,
-                push: true,
-                message: 'Built _site from commit %sourceCommit% on branch %sourceBranch%'
-            },
-            pages: {
+ critical: {
+      options: {
+      base: '<%= app.dist %>',
+        minify: true,
+        width: 1440,
+        height: 900,
+        ignore: [
+          '@font-face',
+          '@import'
+        ]
+      },
+      dist: {
+        expand: true,
+        cwd: '<%= app.dist %>',
+        src: '{,**/}*.html',
+        dest: '<%= app.dist %>',
+      }
+    },
+        cssmin: {
+            dist: {
                 options: {
-                    remote: 'https://github.com/libertarismus/libertarismus.org', // change that
-                    branch: 'gh-pages' // adjust here
-                }
+                    keepSpecialComments: 0,
+                    check: 'gzip'
+                },
+                files: [{
+                    expand: true,
+                    cwd: '.tmp/<%= app.baseurl %>/css',
+                    src: ['*.css'],
+                    dest: '.tmp/<%= app.baseurl %>/css'
+                }]
             }
         },
-
-        shell: {
-            jekyllServe: {
-                command: "jekyll serve  --no-watch"
+        imagemin: {
+            options: {
+                progressive: true
             },
-            jekyllBuild: {
-                command: "jekyll build"
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= app.dist %>/<%= app.baseurl %>/img',
+                    src: '**/*.{jpg,jpeg,png,gif}',
+                    dest: '<%= app.dist %>/<%= app.baseurl %>/img'
+                }]
+            }
+        },
+        svgmin: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= app.dist %>/<%= app.baseurl %>/img',
+                    src: '**/*.svg',
+                    dest: '<%= app.dist %>/<%= app.baseurl %>/img'
+                }]
+            }
+        },
+        copy: {
+            dist: {
+                files: [{
+                    expand: true,
+                    dot: true,
+                    cwd: '.tmp/<%= app.baseurl %>',
+                    src: [
+                        'css/**/*',
+                        'js/**/*'
+                    ],
+                    dest: '<%= app.dist %>/<%= app.baseurl %>'
+                }]
+            }
+        },
+        buildcontrol: {
+            dist: {
+                options: {
+                    dir: '<%= app.dist %>/<%= app.baseurl %>',
+                    remote: 'git@github.com:user/repo.git',
+                    branch: 'gh-pages',
+                    commit: true,
+                    push: true,
+                    connectCommits: false
+                }
             }
         }
     });
-
-
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-sass');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-autoprefixer');
-    grunt.loadNpmTasks('grunt-shell');
-    grunt.loadNpmTasks('grunt-build-control');
-
-    // Default task(s).
-
-    grunt.registerTask("serve", ["shell:jekyllServe"]);
-    grunt.registerTask("default", ["sass", "autoprefixer", "uglify", "shell:jekyllBuild"]);
-    grunt.registerTask("deploy", ["buildcontrol:pages"]);
+ 
+    // Define Tasks
+    grunt.registerTask('serve', function(target) {
+        if (target === 'dist') {
+            return grunt.task.run(['build', 'connect:dist:keepalive']);
+        }
+ 
+        grunt.task.run([
+            'clean:server',
+            'jekyll:server',
+            'sass:server',
+            'autoprefixer',
+            'uglify',
+            'connect:livereload',
+            'watch'
+        ]);
+    });
+ 
+    grunt.registerTask('server', function() {
+        grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
+        grunt.task.run(['serve']);
+    });
+ 
+    grunt.registerTask('build', [
+        'clean:dist',
+        'jekyll:dist',
+        'imagemin',
+        'svgmin',
+        'sass:dist',
+        'uncss',
+        'autoprefixer',
+        'cssmin',
+        'uglify',
+	'critical',
+        'htmlmin'
+    ]);
+ 
+    grunt.registerTask('deploy', [
+        'build',
+        'copy',
+        'buildcontrol'
+    ]);
+ 
+    grunt.registerTask('default', [
+        'serve'
+    ]);
 };
