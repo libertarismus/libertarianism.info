@@ -12,6 +12,8 @@ category_dir: /category
 author_dir: /author
 author_title_prefix: 'Posted by '
 media_folder: /img
+future: false
+show_drafts: false
 author_default_avatar: /profile-pic.jpg
 #pinterest: ""
 #instagram: ""
