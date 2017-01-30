@@ -139,7 +139,7 @@ require('load-grunt-tasks')(grunt);
                 },
                 files: [{
                     expand: true,
-                    cwd: '<%= app.app %>/_assets/scss',
+                    cwd: '<%= app.app %>/_assets/sass',
                     src: '**/*.{scss,sass}',
                     dest: '.tmp/<%= app.baseurl %>/css',
                     ext: '.css'
@@ -151,7 +151,7 @@ require('load-grunt-tasks')(grunt);
                 },
                 files: [{
                     expand: true,
-                    cwd: '<%= app.app %>/_assets/scss',
+                    cwd: '<%= app.app %>/_assets/sass',
                     src: '**/*.{scss,sass}',
                     dest: '<%= app.dist %>/<%= app.baseurl %>/css',
                     ext: '.css'
