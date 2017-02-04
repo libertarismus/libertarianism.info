@@ -53,10 +53,10 @@
             left: 50%;
             transform: translate(-50%, -50%) scale(1);
             transition: .3s all ease-in-out;
-            height: 100px;
+            height: 50px;
             display: block;
             max-width: 750px;
-            width: 30%;
+            width: 25%;
 
             svg{
                 @extend %paddinghack;
