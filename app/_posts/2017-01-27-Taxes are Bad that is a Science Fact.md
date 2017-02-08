@@ -8,15 +8,7 @@ tags: [Taxation, Science]
 category: [Taxation]
 ---
 
-Taxation is theft is one of the key catch phrases of libertarianism. We as libertarians often argue that taxation should be abolished:
-
-* Because it is inherently involuntary.
-* Because it violates personal freedom.
-* Because it violates the NAP
-
-<br />
-
-But there is another issue with taxation it slows economic growth. 
+High taxes slow down economic growth. 
 Higher taxes in almost all cases decrease growth and in the best scenario just have no influence this is not just an opinion there are 26 studies that prove this:
 
 [http://taxfoundation.org/article/what-evidence-taxes-and-growth](http://taxfoundation.org/article/what-evidence-taxes-and-growth)
