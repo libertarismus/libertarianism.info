@@ -8,9 +8,13 @@
             {% endif %}
         {% elsif post.type == "youtube" %}
             {% if post.yt-video-id %}
-                <div class="video_container">
+		<div itemprop="video" itemscope itemtype="http://schema.org/VideoObject">
+			<meta itemprop="thumbnailURL" content="https://i.ytimg.com/vi/{{ post.yt-video-id }}/hqdefault.jpg" />
+			<meta itemprop="embedURL" content="https://youtube.googleapis.com/v/{{ post.yt-video-id }}" />
+                <div  id="schema-videoobject" class="video_container">
                     <iframe src="https://www.youtube.com/embed/{{ post.yt-video-id }}?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
                 </div>
+</div>
             {% endif %}
         {% elsif post.type == "audio" %}
             {% if post.audio-embed %}
