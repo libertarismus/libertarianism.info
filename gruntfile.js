@@ -185,10 +185,11 @@ require('load-grunt-tasks')(grunt);
  critical: {
       options: {
       base: '<%= app.dist %>',
+	extract: true,
         minify: true,
 	inline: true,
-        width: 320,
-        height: 480,
+        width: 1920,
+        height: 1024,
       },
       dist: {
         expand: true,
