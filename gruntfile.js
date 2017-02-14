@@ -186,12 +186,9 @@ require('load-grunt-tasks')(grunt);
       options: {
       base: '<%= app.dist %>',
         minify: true,
-        width: 1024,
-        height: 768,
-        ignore: [
-          '@font-face',
-          '@import'
-        ]
+	inline: true,
+        width: 320,
+        height: 480,
       },
       dist: {
         expand: true,
