@@ -188,8 +188,8 @@ require('load-grunt-tasks')(grunt);
 	extract: true,
         minify: true,
 	inline: true,
-        width: 1920,
-        height: 1024,
+        width: 1024,
+        height: 768,
       },
       dist: {
         expand: true,
