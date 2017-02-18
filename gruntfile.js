@@ -147,7 +147,7 @@ require('load-grunt-tasks')(grunt);
             },
             dist: {
                 options: {
-                    outputStyle: 'compressed'
+                    outputStyle: 'expanded'
                 },
                 files: [{
                     expand: true,
@@ -187,16 +187,25 @@ require('load-grunt-tasks')(grunt);
       base: '<%= app.dist %>',
 	extract: true,
         minify: true,
-	inline: true,
-        width: 1024,
-        height: 768,
+        width: 1920,
+        height: 1080,
+
       },
       dist: {
         expand: true,
+	inline: true,
         cwd: '<%= app.dist %>',
         src: '{,**/}*.html',
         dest: '<%= app.dist %>',
-      }
+      },
+      mytest:{
+        base: './dist/',
+        src:'./dist/index.html',
+        dest: './dist/critical.css',
+        minify: false,
+        inline: false,
+	include: [/\.articles.*/,'.articles article:nth-of-type(4n)','.articles article:nth-of-type(4n){margin-right:0}',/.articles.*/,/articles.*/,'articles','.articles'],
+}
     },
         cssmin: {
             dist: {
@@ -298,6 +307,18 @@ require('load-grunt-tasks')(grunt);
 	'critical',
         'htmlmin'
     ]);
+
+
+   grunt.registerTask('myserv', [
+        'clean:dist',
+        'jekyll:dist',
+        'sass:dist',
+        'uncss',
+        'autoprefixer',
+        'critical:mytest',
+'connect:dist:keepalive'
+    ]);
+
  
     grunt.registerTask('deploy', [
         'build',
