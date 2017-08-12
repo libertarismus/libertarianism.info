@@ -12,7 +12,7 @@ category_dir: /category
 author_dir: /author
 author_title_prefix: 'Posted by '
 media_folder: /img
-future: false
+future: true
 show_drafts: false
 author_default_avatar: /profile-pic.jpg
 seo_site_logo: https://www.libertarianism.info/Voluntarism_Logo.png
