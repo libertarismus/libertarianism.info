@@ -1,8 +1,8 @@
 ---
 author: Carsten
 type: youtube
-yt-video-id: veBoQJogOAk
-image: https://img.youtube.com/vi/veBoQJogOAk/0.jpg
+yt-video-id: Aqjcikdjcqo
+image: https://img.youtube.com/vi/Aqjcikdjcqo/0.jpg
 title: "Cultural Marxism is the Danger of our Time"
 description: "This Video explains cultural marxism."
 tags: [video, Leftists, marxism]
