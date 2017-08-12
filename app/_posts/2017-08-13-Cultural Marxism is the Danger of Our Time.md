@@ -1,5 +1,5 @@
 ---
-author: Carsten
+author: Frank
 type: youtube
 yt-video-id: Aqjcikdjcqo
 image: https://img.youtube.com/vi/Aqjcikdjcqo/0.jpg
@@ -14,4 +14,4 @@ Cultural Marxism refers to the general application of the Frankfurt School's Mar
 Cultural Marxists try to redefine terms like sexism and racism. According to their deffinition sexism cannot apply to men... and black people cannot be racist towards white people.
 Cultural Marxists try to create an environment that is inherently unjust and unfree...
 
-
+Cultural Marists created sciences like gender studies or whiteness studies to give their ideology a scientific appeal and to legitimize their ideology.
