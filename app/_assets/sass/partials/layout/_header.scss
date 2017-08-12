@@ -38,7 +38,7 @@
         top: 0;
         left: 0;
         transition: .3s all ease-in-out;
-        padding: 55px 10px; // adjust to change header height
+        padding: 3% 10px; // adjust to change header height
         box-sizing: border-box;
         overflow: hidden;
 
@@ -47,7 +47,7 @@
         }
 
         .logo {
-//            @include paddinghack(100%, 127.27984, 28.97019); // use your logo dimensions here
+            @include paddinghack(100%, 16, 9); // use your logo dimensions here
             position: absolute;
             top: 50%;
             left: 50%;

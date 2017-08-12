@@ -95,7 +95,7 @@ iframe{
 }
 
 .margin{
-    padding-top: 50px;
+    padding-top: 3%;
     width: 100%;
     .content{
         @include flexbox(row, wrap, space-between, stretch);
